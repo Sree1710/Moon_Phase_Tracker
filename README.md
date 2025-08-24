@@ -13,8 +13,8 @@ Built using HTML, CSS, and JavaScript.
 
 ---
 
-## Demo
-🔗 [Live App]([https://sree1710.github.io/Moon_Phase_Tracker/]) 
+## Live Demo
+Try it live: [Moon Phase Tracker](https://sree1710.github.io/Moon_Phase_Tracker/)
 
 ---
 
