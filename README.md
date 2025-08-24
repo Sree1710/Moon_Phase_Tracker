@@ -13,11 +13,6 @@ Built using HTML, CSS, and JavaScript.
 
 ---
 
-## Live Demo
-Try it live: [Moon Phase Tracker](https://sree1710.github.io/Moon_Phase_Tracker/)
-
----
-
 ## Tech Stack
 - HTML  
 - CSS  
