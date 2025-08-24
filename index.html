@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moon Phase Tracker</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; background: #0a0a23; color: #fff; }
+    h1 { margin-top: 20px; }
+    .moon-phase { margin: 20px; padding: 20px; border-radius: 12px; background: #1c1c3c; display: inline-block; }
+    .forecast { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px; }
+    .day { padding: 10px; background: #2b2b52; border-radius: 10px; }
+    button { padding: 10px 20px; margin-top: 15px; border: none; border-radius: 8px; background: #3a3ad1; color: #fff; cursor: pointer; }
+    button:hover { background: #5555ff; }
+  </style>
+</head>
+<body>
+  <h1>🌙 Moon Phase Tracker</h1>
+  <div class="moon-phase" id="today"></div>
+  <button onclick="showNext7Days()">Next 7 Days</button>
+  <div class="forecast" id="forecast"></div>
+
+  <script>
+    function getMoonPhase(date) {
+      const synodicMonth = 29.53058867;
+      const knownNewMoon = new Date("2023-01-21T20:53:00Z");
+      const daysSinceNew = (date - knownNewMoon) / (1000 * 60 * 60 * 24);
+      const currentPhase = daysSinceNew % synodicMonth;
+
+      if (currentPhase < 1) return "🌑 New Moon";
+      else if (currentPhase < 7.4) return "🌒 Waxing Crescent";
+      else if (currentPhase < 8.9) return "🌓 First Quarter";
+      else if (currentPhase < 14.8) return "🌔 Waxing Gibbous";
+      else if (currentPhase < 15.8) return "🌕 Full Moon";
+      else if (currentPhase < 22.1) return "🌖 Waning Gibbous";
+      else if (currentPhase < 23.7) return "🌗 Last Quarter";
+      else return "🌘 Waning Crescent";
+    }
+
+    function showToday() {
+      const today = new Date();
+      const phase = getMoonPhase(today);
+      document.getElementById("today").innerHTML =
+        `<h2>Today</h2><p>${today.toDateString()}</p><h3>${phase}</h3>`;
+    }
+
+    function showNext7Days() {
+      const forecast = document.getElementById("forecast");
+      forecast.innerHTML = "";
+      for (let i = 1; i <= 7; i++) {
+        const date = new Date();
+        date.setDate(date.getDate() + i);
+        const phase = getMoonPhase(date);
+        const div = document.createElement("div");
+        div.className = "day";
+        div.innerHTML = `<strong>${date.toDateString()}</strong><br>${phase}`;
+        forecast.appendChild(div);
+      }
+    }
+
+    showToday();
+  </script>
+</body>
+</html>
